@@ -2,6 +2,7 @@ package com.sachin.lms.subjectserviceapi.service.impl;
 
 
 import com.sachin.lms.subjectserviceapi.dto.request.RequestSubjectDto;
+import com.sachin.lms.subjectserviceapi.dto.response.ResponseSubjectDto;
 import com.sachin.lms.subjectserviceapi.entity.Subject;
 import com.sachin.lms.subjectserviceapi.repository.SubjectRepository;
 import com.sachin.lms.subjectserviceapi.service.SubjectService;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,5 +36,16 @@ public class SubjectServiceImpl implements SubjectService {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<ResponseSubjectDto> findAll() {
+        List<Subject> all = subjectRepository.findAll();
+        List<ResponseSubjectDto> dtos = new ArrayList<>();
+        for (Subject sub:all
+        ) {
+            dtos.add(new ResponseSubjectDto(sub.getId(), sub.getName(), sub.isStatus()));
+        }
+        return dtos;
     }
 }

@@ -37,4 +37,14 @@ public class SubjectController {
         return subjectService.isListAvailable(id);
 
     }
+
+    @GetMapping("/list")
+    private ResponseEntity<StandardResponse> findAll() {
+        return new ResponseEntity<>(
+                new StandardResponse(201, "list of Subjects",
+                        subjectService.findAll()),
+                HttpStatus.CREATED
+        );
+    }
+
 }
