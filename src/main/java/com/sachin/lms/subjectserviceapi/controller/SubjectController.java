@@ -41,9 +41,9 @@ public class SubjectController {
     @GetMapping("/list")
     private ResponseEntity<StandardResponse> findAll() {
         return new ResponseEntity<>(
-                new StandardResponse(201, "list of Subjects",
+                new StandardResponse(200, "list of Subjects",
                         subjectService.findAll()),
-                HttpStatus.CREATED
+                HttpStatus.OK
         );
     }
 
